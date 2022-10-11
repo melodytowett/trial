@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p><a href="/hello">Hello mel</a></p>
+<form action="/hello" method="GET" id="nameForm">
+  <div>
+    <label for="nameForm">What is your Name?</label>
+    <input name="myName" id="nameField">
+    <button>Greetings</button>
+  </div>
+  <div>
+    <label for="nameForm">What is your stack?</label>
+    <input name="myName" id="nameField2">
+    <button>Stack</button>
+  </div>
+</form>
+<h1>Upload Images</h1>
+<input id="fieldupload" type="file" name="fileupload">
+<button id="upload-button" onclick="uploadFile()">upload</button>
+<script>
+  async function uploadFile(){
+    let formData = new FormData();
+    formData.append("data",fileupload.files[0]);
+    await fetch('http://localhost:8080/photos',{
+      method:"POST",
+      body:formData
+    }).then(result => result.text())
+            .then(text => alert(text));
+  }
+</script>
+</body>
+</html>
